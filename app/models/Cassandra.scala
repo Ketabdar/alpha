@@ -35,7 +35,7 @@ class SimpleClient(node: String) {
       """CREATE TABLE IF NOT EXISTS gee.songs (
         id uuid PRIMARY KEY,
         firstname text,
-        album text,
+        lastname text,
         artist text,
         tags set<text>,
         data blob
@@ -43,7 +43,7 @@ class SimpleClient(node: String) {
     session.execute(
       """CREATE TABLE IF NOT EXISTS gee.playlists (
         id uuid,
-        firstname text,
+        lastname text,
         album text,
         artist text,
         song_id uuid,

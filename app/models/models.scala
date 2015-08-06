@@ -13,7 +13,7 @@ import com.datastax.driver.core.ResultSet
 import com.datastax.driver.core.querybuilder.QueryBuilder
 import com.datastax.driver.core.Row
 
-case class User(id: UUID, firstname: String, lastname: String, artist: String)
+case class User(id: UUID, firstname: String, lastname: String, email: String)
 
 class UsersRepository(client: SimpleClient) {
 
@@ -29,17 +29,17 @@ class UsersRepository(client: SimpleClient) {
   }
 
   private def song(row: Row): User =
-    User(row.getUUID("id"), row.getString("firstname"), row.getString("album"), row.getString("artist"))
+    User(row.getUUID("id"), row.getString("firstname"), row.getString("lastname"), row.getString("email"))
 
   def getById(id: UUID)(implicit ctxt: ExecutionContext): Future[User] = {
     val stmt = new BoundStatement(client.session.prepare("SELECT * FROM gee.songs WHERE id = ?;"))
     client.session.executeAsync(stmt.bind(id)).toScalaFuture.map(rs => song(rs.one))
   }
 
-  def insert(firstname: String, album: String, artist: String)(implicit ctxt: ExecutionContext): Future[UUID] = {
+  def insert(firstname: String, lastname: String, artist: String)(implicit ctxt: ExecutionContext): Future[UUID] = {
     val stmt = new BoundStatement(client.session.prepare("INSERT INTO gee.songs (id, firstname, album, artist) VALUES (?, ?, ?, ?);"))
     val id = UUIDs.timeBased
-    client.session.executeAsync(stmt.bind(id, firstname, album, artist)).toScalaFuture.map(rs => id)
+    client.session.executeAsync(stmt.bind(id, firstname, lastname, artist)).toScalaFuture.map(rs => id)
   }
 }
 
