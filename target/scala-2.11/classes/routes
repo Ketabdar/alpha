@@ -1,0 +1,27 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+#http://127.0.0.1:9000/url/repos
+#http://127.0.0.1:9000/file/products
+#http://127.0.0.1:9000/file/categories
+
+GET     /song                           controllers.Cass.index
+#GET     /user                           controllers.User.index
+POST    /song                           controllers.Cass.createSong
+GET     /song/:id                       controllers.Cass.songById(id)
+
+
+GET     /                           controllers.Application.index
+GET     /v1/*filename               controllers.Application.staticUrl(filename: String)
+GET     /url/*filename              controllers.Application.staticUrl(filename: String)
+GET     /file/*filename             controllers.Application.staticFile(filename: String)
+POST    /file/*filename             controllers.Application.staticFile(filename: String)
+DELETE  /file/*filename             controllers.Application.staticFile(filename: String)
+PATCH   /file/*filename             controllers.Application.staticFile(filename: String)
+PUT     /file/*filename             controllers.Application.staticFile(filename: String)
+GET     /base                       controllers.Application.base
+GET     /home                       controllers.Application.home
+GET     /search                     controllers.Application.search(q: String)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

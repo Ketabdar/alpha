@@ -1,0 +1,295 @@
+{
+  "results": [
+    {
+      "delivery": {
+        "time": {
+          "renderAs": "days",
+          "amount": "4",
+          "units": "days"
+        },
+        "type": "parcelservice",
+        "terms": null,
+        "deliveredBy": null,
+        "text": "",
+        "typeLabelLink": ""
+      },
+      "brand": {
+        "id": "",
+        "title": "Bellinzona",
+        "description": ""
+      },
+      "media": [
+        {
+          "uri": "http://cdn.home24.net/resized/media/catalog/product/s/i/sitzbank-hilda-kunstleder-weiss-541032.png?output-format=jpg&interpolation=progressive-bicubic",
+          "mimeType": "jpg",
+          "type": null,
+          "priority": 0,
+          "size": null
+        }
+      ],
+      "sku": "M-ER-S00029",
+      "title": "Sitzbank Hilda",
+      "price": {
+        "amount": "179.99",
+        "currency": "EUR",
+        "isRecommendedRetailPrice": false
+      },
+      "_metadata": {
+        "type": "article"
+      },
+      "_links": {
+        "self": {
+          "href": "https://api-mobile.home24.com/api/v1/articles/M-ER-S00029"
+        },
+        "webShopUrl": {
+          "href": null
+        }
+      }
+    },
+    {
+      "delivery": {
+        "time": {
+          "renderAs": "weeks",
+          "amount": "38",
+          "units": "days"
+        },
+        "type": "parcelservice",
+        "terms": null,
+        "deliveredBy": null,
+        "text": "",
+        "typeLabelLink": ""
+      },
+      "brand": {
+        "id": "",
+        "title": "Wimex",
+        "logo": [
+          "/wimex-490763.gif"
+        ],
+        "description": ""
+      },
+      "media": [
+        {
+          "uri": "http://cdn.home24.net/resized/media/catalog/product/s/i/sitzbank-natascha-eiche-sanremo-dekor-606174.png?output-format=jpg&interpolation=progressive-bicubic",
+          "mimeType": "jpg",
+          "type": null,
+          "priority": 0,
+          "size": null
+        }
+      ],
+      "sku": "M-WI-S00467",
+      "title": "Sitzbank Natascha",
+      "price": {
+        "amount": "99.99",
+        "currency": "EUR",
+        "isRecommendedRetailPrice": false
+      },
+      "_metadata": {
+        "type": "article"
+      },
+      "_links": {
+        "self": {
+          "href": "https://api-mobile.home24.com/api/v1/articles/M-WI-S00467"
+        },
+        "webShopUrl": {
+          "href": null
+        }
+      }
+    },
+    {
+      "delivery": {
+        "time": {
+          "renderAs": "weeks",
+          "amount": "40",
+          "units": "days"
+        },
+        "type": "parcelservice",
+        "terms": null,
+        "deliveredBy": null,
+        "text": "",
+        "typeLabelLink": ""
+      },
+      "brand": {
+        "id": "",
+        "title": "fresh to go",
+        "logo": [
+          "/fresh-to-go-268455.jpg"
+        ],
+        "description": ""
+      },
+      "media": [
+        {
+          "uri": "http://cdn.home24.net/resized/media/catalog/product/s/i/sitzbank-cargo-alpinweiss-lava-1184674.png?output-format=jpg&interpolation=progressive-bicubic",
+          "mimeType": "jpg",
+          "type": null,
+          "priority": 0,
+          "size": null
+        }
+      ],
+      "sku": "M-WI-S00608",
+      "title": "Sitzbank Cargo",
+      "price": {
+        "amount": "229.99",
+        "currency": "EUR",
+        "isRecommendedRetailPrice": false
+      },
+      "_metadata": {
+        "type": "article"
+      },
+      "_links": {
+        "self": {
+          "href": "https://api-mobile.home24.com/api/v1/articles/M-WI-S00608"
+        },
+        "webShopUrl": {
+          "href": null
+        }
+      }
+    },
+    {
+      "delivery": {
+        "time": {
+          "renderAs": "weeks",
+          "amount": "40",
+          "units": "days"
+        },
+        "type": "furnitureshipping",
+        "terms": null,
+        "deliveredBy": null,
+        "text": "",
+        "typeLabelLink": ""
+      },
+      "brand": {
+        "id": "",
+        "title": "Neue Modular",
+        "logo": [
+          "/neue-modular-988474.gif"
+        ],
+        "description": ""
+      },
+      "media": [
+        {
+          "uri": "http://cdn.home24.net/resized/media/catalog/product/s/i/sitzbank-florenz-metall-244357.png?output-format=jpg&interpolation=progressive-bicubic",
+          "mimeType": "jpg",
+          "type": null,
+          "priority": 0,
+          "size": null
+        }
+      ],
+      "sku": "M-NM-SAC-0038",
+      "title": "Sitzbank Florenz",
+      "price": {
+        "amount": "229.99",
+        "currency": "EUR",
+        "isRecommendedRetailPrice": false
+      },
+      "_metadata": {
+        "type": "article"
+      },
+      "_links": {
+        "self": {
+          "href": "https://api-mobile.home24.com/api/v1/articles/M-NM-SAC-0038"
+        },
+        "webShopUrl": {
+          "href": null
+        }
+      }
+    },
+    {
+      "delivery": {
+        "time": {
+          "renderAs": "weeks",
+          "amount": "40",
+          "units": "days"
+        },
+        "type": "furnitureshipping",
+        "terms": null,
+        "deliveredBy": null,
+        "text": "",
+        "typeLabelLink": ""
+      },
+      "brand": {
+        "id": "",
+        "title": "Neue Modular",
+        "logo": [
+          "/neue-modular-988474.gif"
+        ],
+        "description": ""
+      },
+      "media": [
+        {
+          "uri": "http://cdn.home24.net/resized/media/catalog/product/s/i/sitzbank-st-moritz-wildeiche-massiv-372347.png?output-format=jpg&interpolation=progressive-bicubic",
+          "mimeType": "jpg",
+          "type": null,
+          "priority": 0,
+          "size": null
+        }
+      ],
+      "sku": "M-NM-S00088",
+      "title": "Sitzbank St. Moritz",
+      "price": {
+        "amount": "649.99",
+        "currency": "EUR",
+        "isRecommendedRetailPrice": false
+      },
+      "_metadata": {
+        "type": "article"
+      },
+      "_links": {
+        "self": {
+          "href": "https://api-mobile.home24.com/api/v1/articles/M-NM-S00088"
+        },
+        "webShopUrl": {
+          "href": null
+        }
+      }
+    },
+    {
+      "delivery": {
+        "time": {
+          "renderAs": "weeks",
+          "amount": "20",
+          "units": "days"
+        },
+        "type": "parcelservice",
+        "terms": null,
+        "deliveredBy": null,
+        "text": "",
+        "typeLabelLink": ""
+      },
+      "brand": {
+        "id": "",
+        "title": "meise.möbel",
+        "logo": [
+          "/meise-moebel-805494.gif"
+        ],
+        "description": ""
+      },
+      "media": [
+        {
+          "uri": "http://cdn.home24.net/resized/media/catalog/product/p/o/polsterbank-paso-kunstleder-schwarz-246642.png?output-format=jpg&interpolation=progressive-bicubic",
+          "mimeType": "jpg",
+          "type": null,
+          "priority": 0,
+          "size": null
+        }
+      ],
+      "sku": "M-M1-S00156",
+      "title": "Polsterbank Paso",
+      "price": {
+        "amount": "199.99",
+        "currency": "EUR",
+        "isRecommendedRetailPrice": false
+      },
+      "_metadata": {
+        "type": "article"
+      },
+      "_links": {
+        "self": {
+          "href": "https://api-mobile.home24.com/api/v1/articles/M-M1-S00156"
+        },
+        "webShopUrl": {
+          "href": null
+        }
+      }
+    }
+  ]
+}
