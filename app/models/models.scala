@@ -13,7 +13,7 @@ import com.datastax.driver.core.ResultSet
 import com.datastax.driver.core.querybuilder.QueryBuilder
 import com.datastax.driver.core.Row
 
-case class User(id: UUID, firstname: String, lastname: String, email: String)
+case class User(id: UUID, firstname: String, lastname: String, email: String, email_confirmed: String, dataOfBirth: String, gender: String, mobilePhone: String, createdAt: String)
 
 class UsersRepository(client: SimpleClient) {
 
@@ -29,7 +29,8 @@ class UsersRepository(client: SimpleClient) {
   }
 
   private def song(row: Row): User =
-    User(row.getUUID("id"), row.getString("firstname"), row.getString("lastname"), row.getString("email"))
+    User(row.getUUID("id"), row.getString("firstname"), row.getString("lastname"), row.getString("email"), row.getString("email_confirmed"), row.getString("dataOfBirth"),
+                            row.getString("gender"), row.getString("mobilePhone"), row.getString("createdAt"))
 
   def getById(id: UUID)(implicit ctxt: ExecutionContext): Future[User] = {
     val stmt = new BoundStatement(client.session.prepare("SELECT * FROM gee.songs WHERE id = ?;"))

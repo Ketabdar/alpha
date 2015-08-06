@@ -10,15 +10,22 @@ CREATE TABLE songs (id uuid PRIMARY KEY,
                     firstname text,
                     lastname text,
                     email text,
-                    tags set<text>,
-                    data blob ) ;
+                    email_confirmed text,
+                    dataOfBirth text,
+                    gender text,
+                    mobilePhone text,
+                    createdAt text) ;
 
-INSERT INTO songs (id, firstname, lastname, email, tags)    VALUES
+INSERT INTO songs (id, firstname, lastname, email, email_confirmed, dataOfBirth, gender, mobilePhone, createdAt)    VALUES
                   (756716f7-2e54-4715-9f00-91dcbea6cf50,
                    'Houran',
                    'Ketabdar',
                    'Houran.Ketabdar@gmail.com',
-                   {'jazz', '2013'}   );
+                   'Houran.Ketabdar@gmail.com',
+                   '08-09-1987',
+                   'female',
+                   '01729260732',
+                   '06-08-2015');
 
 CREATE TABLE playlists (
            id uuid,
