@@ -30,9 +30,9 @@ class SimpleClient(node: String) {
   def createSchema(): Unit = {
     session.execute("CREATE KEYSPACE IF NOT EXISTS gee WITH replication = {'class':'SimpleStrategy', 'replication_factor':3};")
 
-    //Execute statements to create two new tables, songs and playlists. Add to the createSchema method:
-    session.execute(
-      """CREATE TABLE IF NOT EXISTS gee.songs (
+    //Execute statements to create two new tables, users and playlists. Add to the createSchema method:
+    /*session.execute(
+      """CREATE TABLE IF NOT EXISTS gee.users (
         id uuid PRIMARY KEY,
         firstname text,
         lastname text,
@@ -46,14 +46,14 @@ class SimpleClient(node: String) {
         lastname text,
         album text,
         artist text,
-        song_id uuid,
+        user_id uuid,
         PRIMARY KEY (id, title, album, artist)
-        );""")
+        );""")*/
   }
 
   def loadData() = {
     session.execute(
-      """INSERT INTO gee.songs (id, title, album, artist, tags)
+      """INSERT INTO gee.users (id, title, album, artist, tags)
       VALUES (
           756716f7-2e54-4715-9f00-91dcbea6cf50,
           'Houran',
@@ -62,7 +62,7 @@ class SimpleClient(node: String) {
           {'jazz', '2013'})
           ;""");
     session.execute(
-      """INSERT INTO gee.playlists (id, song_id, title, album, artist)
+      """INSERT INTO gee.playlists (id, user_id, title, album, artist)
       VALUES (
           2cc9ccb7-6221-4ccb-8387-f22b6a1b354d,
           756716f7-2e54-4715-9f00-91dcbea6cf50,
@@ -91,8 +91,8 @@ class SimpleClient(node: String) {
   }
 
   def getRows: ResultSetFuture = {
-    //val query = QueryBuilder.select().all().from("gee", "songs")
-    val query = s"select * from gee.songs allow filtering"
+    //val query = QueryBuilder.select().all().from("gee", "users")
+    val query = s"select * from gee.users allow filtering"
     session.executeAsync(query)
   }
 
@@ -108,7 +108,7 @@ object Cassandra extends App {
   client.createSchema
   client.loadData
   client.querySchema
-  println("Count: " + client.countFrom("songs"))
+  println("Count: " + client.countFrom("users"))
   // client.dropSchema
   client.close
 }

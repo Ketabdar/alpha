@@ -5,10 +5,9 @@
 #http://127.0.0.1:9000/file/products
 #http://127.0.0.1:9000/file/categories
 
-GET     /song                           controllers.Cass.index
-#GET     /user                           controllers.User.index
-POST    /song                           controllers.Cass.createSong
-GET     /song/:id                       controllers.Cass.songById(id)
+GET     /user                           controllers.Cass.index
+POST    /user                           controllers.Cass.createUser
+GET     /user/:id                       controllers.Cass.userById(id)
 
 
 GET     /                           controllers.Application.index

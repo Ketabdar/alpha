@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/user/workspace/letsplay-master-new-1/conf/routes
-// @DATE:Thu Aug 06 12:26:05 CEST 2015
+// @DATE:Thu Aug 06 16:42:09 CEST 2015
 
 import play.api.routing.JavaScriptReverseRoute
 import play.api.mvc.{ QueryStringBindable, PathBindable, Call, JavascriptLiteral }
@@ -23,11 +23,11 @@ package controllers.javascript {
 
   
     // @LINE:10
-    def createSong: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.Cass.createSong",
+    def userById: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Cass.userById",
       """
-        function() {
-          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "song"})
+        function(id) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "user/" + (""" + implicitly[PathBindable[String]].javascriptUnbind + """)("id", encodeURIComponent(id))})
         }
       """
     )
@@ -37,24 +37,24 @@ package controllers.javascript {
       "controllers.Cass.index",
       """
         function() {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "song"})
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "user"})
         }
       """
     )
   
-    // @LINE:11
-    def songById: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.Cass.songById",
+    // @LINE:9
+    def createUser: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Cass.createUser",
       """
-        function(id) {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "song/" + (""" + implicitly[PathBindable[String]].javascriptUnbind + """)("id", encodeURIComponent(id))})
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "user"})
         }
       """
     )
   
   }
 
-  // @LINE:27
+  // @LINE:26
   class ReverseAssets(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -62,7 +62,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:27
+    // @LINE:26
     def versioned: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Assets.versioned",
       """
@@ -74,7 +74,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:14
+  // @LINE:13
   class ReverseApplication(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -82,7 +82,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:17
+    // @LINE:16
     def staticFile: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Application.staticFile",
       """
@@ -96,7 +96,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:22
+    // @LINE:21
     def base: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Application.base",
       """
@@ -106,7 +106,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:24
+    // @LINE:23
     def search: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Application.search",
       """
@@ -116,7 +116,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:23
+    // @LINE:22
     def home: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Application.home",
       """
@@ -126,7 +126,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:15
+    // @LINE:14
     def staticUrl: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Application.staticUrl",
       """
@@ -140,7 +140,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:14
+    // @LINE:13
     def index: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Application.index",
       """

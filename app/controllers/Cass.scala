@@ -22,7 +22,7 @@ import models.JsonFormats._
 
 
 
-//songsRepo: UsersRepository
+//usersRepo: UsersRepository
 
 class Cass extends Controller {
 
@@ -32,17 +32,17 @@ class Cass extends Controller {
   }
 
   def index = Action.async {
-    var songsRepo: UsersRepository = new UsersRepository(new SimpleClient("127.0.0.1"))
-    songsRepo.getAll.map(songs => Ok(Json.toJson(songs)))
+    var usersRepo: UsersRepository = new UsersRepository(new SimpleClient("127.0.0.1"))
+    usersRepo.getAll.map(users => Ok(Json.toJson(users)))
   }
 
-  def createSong = Action.async(parse.json) { implicit request =>
-    // Json Format defined in models.JsonFormats.songDataReads
-    request.body.validate[(String, String, String)].map {
-      case (firstname, album, artist) => {
-        var songsRepo: UsersRepository = new UsersRepository(new SimpleClient("127.0.0.1"))
-        songsRepo.insert(firstname, album, artist).map( id =>
-          Created.withHeaders("Location" -> routes.Cass.songById(id.toString).absoluteURL(false))
+  def createUser = Action.async(parse.json) { implicit request =>
+    // Json Format defined in models.JsonFormats.userDataReads
+    request.body.validate[(String, String, String, String, String, String, String, String, String)].map {
+      case (firstname, lastname, email, email_confirmed, dateOfBirth, gender, mobilePhone, createdAt, password) => {
+        var usersRepo: UsersRepository = new UsersRepository(new SimpleClient("127.0.0.1"))
+        usersRepo.insert(firstname, lastname, email, email_confirmed, dateOfBirth, gender, mobilePhone, createdAt, password).map( id =>
+          Created.withHeaders("Location" -> routes.Cass.userById(id.toString).absoluteURL(false))
         )
       }
     }.recoverTotal {
@@ -50,9 +50,9 @@ class Cass extends Controller {
     }
   }
 
-  def songById(id: String) = Action.async {
-      var songsRepo: UsersRepository = new UsersRepository(new SimpleClient("127.0.0.1"))
-       songsRepo.getById(UUID.fromString(id)).map(song => Ok(Json.toJson(song)))
+  def userById(id: String) = Action.async {
+      var usersRepo: UsersRepository = new UsersRepository(new SimpleClient("127.0.0.1"))
+       usersRepo.getById(UUID.fromString(id)).map(user => Ok(Json.toJson(user)))
   }
 
 }

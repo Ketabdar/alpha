@@ -13,7 +13,10 @@ import com.datastax.driver.core.ResultSet
 import com.datastax.driver.core.querybuilder.QueryBuilder
 import com.datastax.driver.core.Row
 
-case class User(id: UUID, firstname: String, lastname: String, email: String, email_confirmed: String, dataOfBirth: String, gender: String, mobilePhone: String, createdAt: String)
+case class User(id: UUID, firstname: String, lastname: String, email: String, email_confirmed: String, dateOfBirth: String,
+                gender: String, mobilePhone: String, createdAt: String, password: String)
+
+case class UserPrefs(id: UUID, pref: String, tag: String)
 
 class UsersRepository(client: SimpleClient) {
 
@@ -24,23 +27,25 @@ class UsersRepository(client: SimpleClient) {
     import WrapAsScala.iterableAsScalaIterable
 
     client.getRows.toScalaFuture.map { rows =>
-      rows.map(row => song(row)).toList
+      rows.map(row => user(row)).toList
     }
   }
 
-  private def song(row: Row): User =
-    User(row.getUUID("id"), row.getString("firstname"), row.getString("lastname"), row.getString("email"), row.getString("email_confirmed"), row.getString("dataOfBirth"),
-                            row.getString("gender"), row.getString("mobilePhone"), row.getString("createdAt"))
+  private def user(row: Row): User =
+    User(row.getUUID("id"), row.getString("firstname"), row.getString("lastname"), row.getString("email"), row.getString("email_confirmed"), row.getString("dateOfBirth"),
+                            row.getString("gender"), row.getString("mobilePhone"), row.getString("createdAt"), row.getString("password"))
 
   def getById(id: UUID)(implicit ctxt: ExecutionContext): Future[User] = {
-    val stmt = new BoundStatement(client.session.prepare("SELECT * FROM gee.songs WHERE id = ?;"))
-    client.session.executeAsync(stmt.bind(id)).toScalaFuture.map(rs => song(rs.one))
+    val stmt = new BoundStatement(client.session.prepare("SELECT * FROM gee.users WHERE id = ?;"))
+    client.session.executeAsync(stmt.bind(id)).toScalaFuture.map(rs => user(rs.one))
   }
 
-  def insert(firstname: String, lastname: String, artist: String)(implicit ctxt: ExecutionContext): Future[UUID] = {
-    val stmt = new BoundStatement(client.session.prepare("INSERT INTO gee.songs (id, firstname, album, artist) VALUES (?, ?, ?, ?);"))
+  def insert(firstname: String, lastname: String, email: String, email_confirmed: String, dateOfBirth: String, gender: String, mobilePhone: String,
+             createdAt: String, password: String)(implicit ctxt: ExecutionContext): Future[UUID] = {
+    val stmt = new BoundStatement(client.session.prepare("INSERT INTO gee.users (id, firstname, lastname, email, email_confirmed, dateOfBirth, gender, mobilePhone," +
+                                  "createdAt, password) VALUES (?, ?, ?, ?);"))
     val id = UUIDs.timeBased
-    client.session.executeAsync(stmt.bind(id, firstname, lastname, artist)).toScalaFuture.map(rs => id)
+    client.session.executeAsync(stmt.bind(id, firstname, lastname, email, email_confirmed, dateOfBirth, gender, mobilePhone, createdAt, password)).toScalaFuture.map(rs => id)
   }
 }
 
@@ -75,9 +80,16 @@ object JsonFormats {
   private implicit val uuidReads: Reads[java.util.UUID] = uuidReader()
   private implicit val uuidWrites: Writes[UUID] = Writes { uuid => JsString(uuid.toString) }
 
-  implicit val songFormat: Format[User] = Json.format[User]
-  implicit val songDataReads = (
+  implicit val userFormat: Format[User] = Json.format[User]
+  implicit val userDataReads = (
     (__ \ 'firstname).read[String] and
-    (__ \ 'album).read[String] and
-    (__ \ 'artist).read[String]) tupled
+    (__ \ 'lastname).read[String] and
+    (__ \ 'email).read[String] and
+    (__ \ 'email_confirmed).read[String] and
+    (__ \ 'dataOfBirth).read[String] and
+    (__ \ 'gender).read[String] and
+    (__ \ 'mobilePhone).read[String] and
+    (__ \ 'createdAt).read[String] and
+    (__ \ 'password).read[String]
+    ) tupled
 }
