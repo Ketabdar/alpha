@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/user/workspace/letsplay-master-new-1/conf/routes
-// @DATE:Thu Aug 06 16:42:09 CEST 2015
+// @DATE:Fri Aug 07 16:21:58 CEST 2015
 
 import play.api.mvc.{ QueryStringBindable, PathBindable, Call, JavascriptLiteral }
 import play.core.routing.{ HandlerDef, ReverseRouteContext, queryString, dynamicString }
@@ -31,6 +31,12 @@ package controllers {
       Call("GET", _prefix + { _defaultPrefix } + "user")
     }
   
+    // @LINE:11
+    def userLoginByEmailAndPassword(): Call = {
+      import ReverseRouteContext.empty
+      Call("POST", _prefix + { _defaultPrefix } + "userlogin")
+    }
+  
     // @LINE:9
     def createUser(): Call = {
       import ReverseRouteContext.empty
@@ -39,14 +45,14 @@ package controllers {
   
   }
 
-  // @LINE:26
+  // @LINE:27
   class ReverseAssets(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:26
+    // @LINE:27
     def versioned(file:Asset): Call = {
       implicit val _rrc = new ReverseRouteContext(Map(("path", "/public")))
       Call("GET", _prefix + { _defaultPrefix } + "assets/" + implicitly[PathBindable[Asset]].unbind("file", file))
@@ -54,19 +60,19 @@ package controllers {
   
   }
 
-  // @LINE:13
+  // @LINE:14
   class ReverseApplication(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:16
+    // @LINE:17
     def staticFile(filename:String): Call = {
     
       (filename: @unchecked) match {
       
-        // @LINE:16
+        // @LINE:17
         case (filename)  =>
           import ReverseRouteContext.empty
           Call("GET", _prefix + { _defaultPrefix } + "file/" + implicitly[PathBindable[String]].unbind("filename", filename))
@@ -75,30 +81,30 @@ package controllers {
     
     }
   
-    // @LINE:21
+    // @LINE:22
     def base(): Call = {
       import ReverseRouteContext.empty
       Call("GET", _prefix + { _defaultPrefix } + "base")
     }
   
-    // @LINE:23
+    // @LINE:24
     def search(q:String): Call = {
       import ReverseRouteContext.empty
       Call("GET", _prefix + { _defaultPrefix } + "search" + queryString(List(Some(implicitly[QueryStringBindable[String]].unbind("q", q)))))
     }
   
-    // @LINE:22
+    // @LINE:23
     def home(): Call = {
       import ReverseRouteContext.empty
       Call("GET", _prefix + { _defaultPrefix } + "home")
     }
   
-    // @LINE:14
+    // @LINE:15
     def staticUrl(filename:String): Call = {
     
       (filename: @unchecked) match {
       
-        // @LINE:14
+        // @LINE:15
         case (filename)  =>
           import ReverseRouteContext.empty
           Call("GET", _prefix + { _defaultPrefix } + "v1/" + implicitly[PathBindable[String]].unbind("filename", filename))
@@ -107,7 +113,7 @@ package controllers {
     
     }
   
-    // @LINE:13
+    // @LINE:14
     def index(): Call = {
       import ReverseRouteContext.empty
       Call("GET", _prefix)

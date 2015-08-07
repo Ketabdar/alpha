@@ -8,6 +8,7 @@
 GET     /user                           controllers.Cass.index
 POST    /user                           controllers.Cass.createUser
 GET     /user/:id                       controllers.Cass.userById(id)
+POST    /userlogin                      controllers.Cass.userLoginByEmailAndPassword
 
 
 GET     /                           controllers.Application.index

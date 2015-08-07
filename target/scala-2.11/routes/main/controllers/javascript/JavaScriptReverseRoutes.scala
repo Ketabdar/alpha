@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/home/user/workspace/letsplay-master-new-1/conf/routes
-// @DATE:Thu Aug 06 16:42:09 CEST 2015
+// @DATE:Fri Aug 07 16:21:58 CEST 2015
 
 import play.api.routing.JavaScriptReverseRoute
 import play.api.mvc.{ QueryStringBindable, PathBindable, Call, JavascriptLiteral }
@@ -42,6 +42,16 @@ package controllers.javascript {
       """
     )
   
+    // @LINE:11
+    def userLoginByEmailAndPassword: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Cass.userLoginByEmailAndPassword",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "userlogin"})
+        }
+      """
+    )
+  
     // @LINE:9
     def createUser: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Cass.createUser",
@@ -54,7 +64,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:26
+  // @LINE:27
   class ReverseAssets(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -62,7 +72,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:26
+    // @LINE:27
     def versioned: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Assets.versioned",
       """
@@ -74,7 +84,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:13
+  // @LINE:14
   class ReverseApplication(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -82,7 +92,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:16
+    // @LINE:17
     def staticFile: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Application.staticFile",
       """
@@ -96,7 +106,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:21
+    // @LINE:22
     def base: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Application.base",
       """
@@ -106,7 +116,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:23
+    // @LINE:24
     def search: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Application.search",
       """
@@ -116,7 +126,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:22
+    // @LINE:23
     def home: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Application.home",
       """
@@ -126,7 +136,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:14
+    // @LINE:15
     def staticUrl: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Application.staticUrl",
       """
@@ -140,7 +150,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:13
+    // @LINE:14
     def index: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Application.index",
       """

@@ -1,6 +1,8 @@
 package models
 
 import java.util.UUID
+import sun.security.util.Password
+
 import scala.collection.convert.WrapAsScala
 import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
@@ -13,8 +15,9 @@ import com.datastax.driver.core.ResultSet
 import com.datastax.driver.core.querybuilder.QueryBuilder
 import com.datastax.driver.core.Row
 
-case class User(id: UUID, firstname: String, lastname: String, email: String, email_confirmed: String, dateOfBirth: String,
-                gender: String, mobilePhone: String, createdAt: String, password: String)
+case class User(id: UUID, collection_id: UUID, firstname: String, lastname: String, login: String, email: String, email_confirmed: String, dateOfBirth: String,
+                gender: String, mobilePhone: String, createdAt: String, password: String, picUrl: String,
+                tacConfirmed: String, device_id: UUID, client_id: UUID, loggedIn: String, updated_at: String)
 
 case class UserPrefs(id: UUID, pref: String, tag: String)
 
@@ -32,20 +35,32 @@ class UsersRepository(client: SimpleClient) {
   }
 
   private def user(row: Row): User =
-    User(row.getUUID("id"), row.getString("firstname"), row.getString("lastname"), row.getString("email"), row.getString("email_confirmed"), row.getString("dateOfBirth"),
-                            row.getString("gender"), row.getString("mobilePhone"), row.getString("createdAt"), row.getString("password"))
+    User(
+      row.getUUID("id"), row.getUUID("collection_id"), row.getString("firstname"),
+      row.getString("lastname"), row.getString("login"), row.getString("email"),
+         row.getString("email_confirmed"), row.getString("dateOfBirth"), row.getString("gender"), row.getString("mobilePhone"), row.getString("createdAt"), row.getString("password"),
+         row.getString("picUrl"), row.getString("tacConfirmed"), row.getUUID("device_id"), row.getUUID("client_id"), row.getString("loggedIn"), row.getString("updated_at"))
 
   def getById(id: UUID)(implicit ctxt: ExecutionContext): Future[User] = {
     val stmt = new BoundStatement(client.session.prepare("SELECT * FROM gee.users WHERE id = ?;"))
     client.session.executeAsync(stmt.bind(id)).toScalaFuture.map(rs => user(rs.one))
   }
 
-  def insert(firstname: String, lastname: String, email: String, email_confirmed: String, dateOfBirth: String, gender: String, mobilePhone: String,
-             createdAt: String, password: String)(implicit ctxt: ExecutionContext): Future[UUID] = {
-    val stmt = new BoundStatement(client.session.prepare("INSERT INTO gee.users (id, firstname, lastname, email, email_confirmed, dateOfBirth, gender, mobilePhone," +
-                                  "createdAt, password) VALUES (?, ?, ?, ?);"))
+  def insert(collection_id: UUID, firstname: String, lastname: String, login: String, email: String, email_confirmed: String, dateOfBirth: String, gender: String, mobilePhone: String,
+             createdAt: String, password: String, picUrl: String, tacConfirmed: String, device_id: UUID, client_id: UUID,
+             loggedIn: String, updated_at: String)(implicit ctxt: ExecutionContext): Future[UUID] = {
+    val stmt = new BoundStatement(client.session.prepare("INSERT INTO gee.users (id, collection_id, firstname, lastname, login, email, email_confirmed, dateOfBirth, gender, mobilePhone," +
+                                  "createdAt, password, picUrl, tacConfirmed, device_id, client_id, loggedIn, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?," +
+                                  "?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"))
     val id = UUIDs.timeBased
-    client.session.executeAsync(stmt.bind(id, firstname, lastname, email, email_confirmed, dateOfBirth, gender, mobilePhone, createdAt, password)).toScalaFuture.map(rs => id)
+    client.session.executeAsync(stmt.bind(id, collection_id, firstname, lastname, login, email, email_confirmed, dateOfBirth, gender, mobilePhone, createdAt, password,
+                                picUrl, tacConfirmed, device_id, client_id, loggedIn, updated_at)).toScalaFuture.map(rs => id)
+  }
+
+  def userLogin(email: String, password: String)(implicit ctxt: ExecutionContext): Future[UUID] = {
+    val stmt = new BoundStatement(client.session.prepare("SELECT * FROM gee.users WHERE email = ? AND password = ? allow filtering;"))
+    val id = UUIDs.timeBased
+    client.session.executeAsync(stmt.bind(email, password)).toScalaFuture.map(rs => id)
   }
 }
 
@@ -82,14 +97,27 @@ object JsonFormats {
 
   implicit val userFormat: Format[User] = Json.format[User]
   implicit val userDataReads = (
+    (__ \ 'collection_id).read[UUID] and
     (__ \ 'firstname).read[String] and
     (__ \ 'lastname).read[String] and
+    (__ \ 'login).read[String] and
     (__ \ 'email).read[String] and
     (__ \ 'email_confirmed).read[String] and
-    (__ \ 'dataOfBirth).read[String] and
+    (__ \ 'dateOfBirth).read[String] and
     (__ \ 'gender).read[String] and
     (__ \ 'mobilePhone).read[String] and
     (__ \ 'createdAt).read[String] and
+    (__ \ 'password).read[String] and
+    (__ \ 'picUrl).read[String] and
+    (__ \ 'tacConfirmed).read[String] and
+    (__ \ 'device_id).read[UUID] and
+    (__ \ 'client_id).read[UUID] and
+    (__ \ 'loggedIn).read[String] and
+    (__ \ 'updated_at).read[String]
+    ) tupled
+
+  implicit val userDataReadsLogin = (
+    (__ \ 'email).read[String] and
     (__ \ 'password).read[String]
     ) tupled
 }

@@ -6,7 +6,7 @@ CREATE KEYSPACE gee WITH replication = {'class': 'SimpleStrategy', 'replication_
 
 use gee;
 
-CREATE TABLE users (id uuid PRIMARY KEY,
+CREATE TABLE users (id uuid,
                     collection_id uuid,
                     firstname text,
                     lastname text,
@@ -19,37 +19,77 @@ CREATE TABLE users (id uuid PRIMARY KEY,
                     createdAt text,
                     password text,
                     picUrl text,
-                    tacConfirmed true,
+                    tacConfirmed text,
                     device_id uuid,
                     client_id uuid,
-                    loggedIn true,
+                    loggedIn text,
                     updated_at text,
-                    PRIMARY KEY (id)
+                    PRIMARY KEY (id, email, password)
                     );
 
-INSERT INTO users (id, firstname, lastname, email, email_confirmed, dateOfBirth, gender, mobilePhone, createdAt, password)    VALUES
+INSERT INTO users (id, collection_id, firstname, lastname, login, email, email_confirmed, dateOfBirth, gender, mobilePhone, createdAt, password, picUrl,
+                    tacConfirmed, device_id, client_id, loggedIn, updated_at)    VALUES
                   (756716f7-2e54-4715-9f00-91dcbea6cf50,
+                   756716f7-2e54-4715-9f00-91dcbea6cf52,
                    'Houran',
                    'Ketabdar',
-                   'Houran.Ketabdar@gmail.com',
-                   'Houran.Ketabdar@gmail.com',
+                   'hour',
+                   'Houran.Ketabdar',
+                   'Houran.Ketabdar',
                    '08-09-1987',
                    'female',
                    '01729260732',
                    '06-08-2015',
-                   '1234');
+                   '1234',
+                   'http://...',
+                   'true',
+                   756716f7-2e54-4715-9f00-91dcbea6cf58,
+                   756716f7-2e54-4715-9f00-91dcbea6cf54,
+                   'true',
+                   '09-08-2015');
 
-INSERT INTO users (id, firstname, lastname, email, email_confirmed, dateOfBirth, gender, mobilePhone, createdAt, password)    VALUES
-                  (756716f7-2e54-4715-9f00-91dcbea6cf51,
+INSERT INTO users (id, collection_id, firstname, lastname, login, email, email_confirmed, dateOfBirth, gender, mobilePhone, createdAt, password, picUrl,
+                    tacConfirmed, device_id, client_id, loggedIn, updated_at)    VALUES
+                  (756716f7-2e54-4715-9f00-91dcbea6cf60,
+                   756716f7-2e54-4715-9f00-91dcbea6cf61,
                    'rand',
                    'random',
-                   'Houran.Ketabdar@gmail.com',
-                   'Houran.Ketabdar@gmail.com',
+                   'hour1234',
+                   'Houran.Ketabdarbb@gmail.com',
+                   'Houran.Ketabdarbb@gmail.com',
                    '08-09-1987',
-                   'male',
+                   'female',
                    '01729260732',
                    '06-08-2015',
-                   '1234');
+                   '123456',
+                   'http://...',
+                   'true',
+                   756716f7-2e54-4715-9f00-91dcbea6cf62,
+                   756716f7-2e54-4715-9f00-91dcbea6cf63,
+                   'true',
+                   '09-08-2015');
+
+INSERT INTO users (id, collection_id, firstname, lastname, login, email, email_confirmed, dateOfBirth, gender, mobilePhone, createdAt, password, picUrl,
+                    tacConfirmed, device_id, client_id, loggedIn, updated_at)    VALUES
+                  (756716f7-2e54-4715-9f00-91dcbea6cf64,
+                   756716f7-2e54-4715-9f00-91dcbea6cf65,
+                   'test',
+                   'test123',
+                   'hour1234test',
+                   'Houran.Ketabdaraa@gmail.com',
+                   'Houran.Ketabdaraa@gmail.com',
+                   '08-09-1987',
+                   'female',
+                   '01729260732',
+                   '06-08-2015',
+                   '123478',
+                   'http://...',
+                   'true',
+                   756716f7-2e54-4715-9f00-91dcbea6cf66,
+                   756716f7-2e54-4715-9f00-91dcbea6cf67,
+                   'true',
+                   '09-08-2015');
+
 
 CREATE TABLE userPrefs (
            id uuid,
